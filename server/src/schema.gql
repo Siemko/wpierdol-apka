@@ -3,6 +3,16 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input AddUserInput {
+  userName: String!
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  addUser(user: AddUserInput!): User!
+}
+
 type Query {
   findAllUsers: [User!]!
 }
