@@ -16,4 +16,10 @@ export class UsersResolver {
   async addUser(@Args('user') userInput: AddUserInput): Promise<User> {
     return await this.usersService.add(userInput);
   }
+
+  @Mutation(() => User)
+  async deleteUser(@Args('id') id: string): Promise<User> {
+    return await this.usersService.delete(id);
+  }
+
 }

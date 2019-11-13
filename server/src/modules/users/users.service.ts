@@ -24,4 +24,7 @@ export class UsersService {
     return user.save();
   }
 
+  async delete(id: string) : Promise<User> {
+    return this.userModel.findByIdAndRemove(id);
+  }
 }
