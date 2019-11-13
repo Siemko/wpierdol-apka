@@ -31,9 +31,9 @@ export class UsersService {
 
   async update(id: string, dto: UpdateUserInput): Promise<User> {
     const user = await this.userModel.findById(id);
-    if (!user) {
-      throw new Error(`There is no user with id "${id}"`)
-    }
+    if (!user) 
+      throw new Error(`There is no user with id "${id}"`);
+    
     if (dto.email)
       user.email = dto.email;
     if (dto.userName)
@@ -42,5 +42,13 @@ export class UsersService {
       user.password = dto.password;//add hash functions later
 
     return user.save();
+  }
+
+  async findOne(id: string): Promise<User> {
+    const user = await this.userModel.findById(id);
+    if (!user) 
+      throw new Error(`There is no user with id "${id}"`);
+      
+    return this.userModel.findById(id);
   }
 }

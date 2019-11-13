@@ -13,6 +13,11 @@ export class UsersResolver {
     return await this.usersService.findAll();
   }
 
+  @Query(() => User)
+  async findUser(@Args('id') id: string): Promise<User> {
+    return await this.usersService.findOne(id);
+  }
+
   @Mutation(() => User)
   async addUser(@Args('user') userInput: AddUserInput): Promise<User> {
     return await this.usersService.add(userInput);

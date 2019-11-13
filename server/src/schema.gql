@@ -17,6 +17,7 @@ type Mutation {
 
 type Query {
   findAllUsers: [User!]!
+  findUser(id: String!): User!
 }
 
 input UpdateUserInput {
