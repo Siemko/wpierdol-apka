@@ -12,10 +12,17 @@ input AddUserInput {
 type Mutation {
   addUser(user: AddUserInput!): User!
   deleteUser(id: String!): User!
+  updateUser(user: UpdateUserInput!, id: String!): User!
 }
 
 type Query {
   findAllUsers: [User!]!
+}
+
+input UpdateUserInput {
+  userName: String
+  email: String
+  password: String
 }
 
 type User {

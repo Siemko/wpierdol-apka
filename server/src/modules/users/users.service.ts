@@ -3,6 +3,7 @@ import { User } from './models/user';
 import { InjectModel } from '@nestjs/mongoose';
 import { AddUserInput } from './models/addUserInput';
 import { Injectable } from '@nestjs/common';
+import { UpdateUserInput } from './models/updateUserInput';
 
 @Injectable()
 export class UsersService {
@@ -24,7 +25,22 @@ export class UsersService {
     return user.save();
   }
 
-  async delete(id: string) : Promise<User> {
+  async delete(id: string): Promise<User> {
     return this.userModel.findByIdAndRemove(id);
+  }
+
+  async update(id: string, dto: UpdateUserInput): Promise<User> {
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      throw new Error(`There is no user with id "${id}"`)
+    }
+    if (dto.email)
+      user.email = dto.email;
+    if (dto.userName)
+      user.userName = dto.userName;
+    if (dto.password)
+      user.password = dto.password;//add hash functions later
+
+    return user.save();
   }
 }
