@@ -3,6 +3,7 @@ import { User } from './models/user';
 import { UsersService } from './users.service';
 import { AddUserInput } from './models/addUserInput';
 import { Inject } from '@nestjs/common';
+import { EditUserInput } from './models/editUserInput';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -19,5 +20,10 @@ export class UsersResolver {
   @Mutation(() => User)
   async addUser(@Args('user') userInput: AddUserInput): Promise<User> {
     return this.usersService.add(userInput);
+  }
+
+  @Mutation(() => User)
+  async editUser(@Args('user') userInput: EditUserInput): Promise<User> {
+    return this.usersService.edit(userInput);
   }
 }

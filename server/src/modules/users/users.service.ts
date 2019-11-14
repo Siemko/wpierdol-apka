@@ -3,6 +3,7 @@ import { User } from './models/user';
 import { InjectModel } from '@nestjs/mongoose';
 import { AddUserInput } from './models/addUserInput';
 import { Injectable, Scope } from '@nestjs/common';
+import { EditUserInput } from './models/editUserInput';
 
 @Injectable({
   scope: Scope.DEFAULT,
@@ -21,6 +22,14 @@ export class UsersService {
     const user = new this.userModel();
     user.userName = dto.userName;
     user.password = dto.password;
+    user.email = dto.email;
+
+    return user.save();
+  }
+
+  async edit(dto: EditUserInput): Promise<User> {
+    const user = await this.userModel.findById(dto._id).exec();
+    user.userName = dto.userName;
     user.email = dto.email;
 
     return user.save();
