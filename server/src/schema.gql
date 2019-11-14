@@ -18,6 +18,7 @@ input EditUserInput {
 type Mutation {
   addUser(user: AddUserInput!): User!
   editUser(user: EditUserInput!): User!
+  deleteUser(userId: String!): String!
 }
 
 type Query {

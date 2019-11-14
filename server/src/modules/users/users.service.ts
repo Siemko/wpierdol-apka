@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { AddUserInput } from './models/addUserInput';
 import { Injectable, Scope } from '@nestjs/common';
 import { EditUserInput } from './models/editUserInput';
+import { ObjectId } from 'bson';
 
 @Injectable({
   scope: Scope.DEFAULT,
@@ -33,6 +34,11 @@ export class UsersService {
     user.email = dto.email;
 
     return user.save();
+  }
+
+  async delete(id: ObjectId): Promise<ObjectId> {
+    await this.userModel.remove({ _id: id }).exec();
+    return id;
   }
 
 }
