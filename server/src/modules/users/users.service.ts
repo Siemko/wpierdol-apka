@@ -2,9 +2,11 @@ import { ReturnModelType } from '@typegoose/typegoose';
 import { User } from './models/user';
 import { InjectModel } from '@nestjs/mongoose';
 import { AddUserInput } from './models/addUserInput';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Scope } from '@nestjs/common';
 
-@Injectable()
+@Injectable({
+  scope: Scope.DEFAULT,
+})
 export class UsersService {
   constructor(
     @InjectModel(User.name)
