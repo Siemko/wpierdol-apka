@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { ObjectId } from 'mongodb';
+import { hashPassword } from '../../utils/hash-password';
 import { AddUserInput } from './models/add-user.input';
 import { EditUserInput } from './models/edit-user.input';
 import { User } from './models/user.schema';
@@ -20,7 +21,7 @@ export class UsersService {
   async add(dto: AddUserInput): Promise<User> {
     const user = new this.userModel();
     user.userName = dto.userName;
-    user.password = dto.password;
+    user.password = await hashPassword(dto.password);
     user.email = dto.email;
 
     return user.save();
