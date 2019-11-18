@@ -11,7 +11,11 @@ input AddUserInput {
 
 type Mutation {
   addUser(user: AddUserInput!): User!
+  deleteUser(userId: ObjectId!): ObjectId!
 }
+
+"""Mongo object id scalar type"""
+scalar ObjectId
 
 type Query {
   findAllUsers: [User!]!

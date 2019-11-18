@@ -1,11 +1,12 @@
 import { ObjectType, Field, ID } from 'type-graphql';
 import { prop, buildSchema } from '@typegoose/typegoose';
 import { Schema } from 'mongoose';
+import { ObjectId } from 'bson';
 
 @ObjectType()
 export class User {
   @Field(() => ID)
-  readonly _id: string;
+  readonly _id: ObjectId;
 
   @Field({ nullable: false })
   @prop({ required: true })

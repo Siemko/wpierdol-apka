@@ -3,6 +3,7 @@ import { User } from './models/user';
 import { InjectModel } from '@nestjs/mongoose';
 import { AddUserInput } from './models/addUserInput';
 import { Injectable } from '@nestjs/common';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class UsersService {
@@ -24,4 +25,8 @@ export class UsersService {
     return user.save();
   }
 
+  async delete(id: ObjectId): Promise<ObjectId> {
+    await this.userModel.remove({ _id: id }).exec();
+    return id;
+  }
 }
