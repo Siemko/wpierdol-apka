@@ -2,7 +2,7 @@ import { Query, Resolver, Args, Mutation } from '@nestjs/graphql';
 import { User } from './models/user';
 import { UsersService } from './users.service';
 import { AddUserInput } from './models/addUserInput';
-import { ObjectIdScalar } from '../common/GraphGLScalars/ObjectIdScalar';
+import { ObjectIdScalar } from '../common/GraphQLScalars/ObjectIdScalar';
 import { ObjectId } from 'bson';
 import { EditUserInput } from './models/editUserInput';
 
