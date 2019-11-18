@@ -12,21 +12,21 @@ export class UsersResolver {
 
   @Query(() => [User])
   async findAllUsers(): Promise<User[]> {
-    return await this.usersService.findAll();
+    return this.usersService.findAll();
   }
 
   @Mutation(() => User)
   async addUser(@Args('user') userInput: AddUserInput): Promise<User> {
-    return await this.usersService.add(userInput);
+    return this.usersService.add(userInput);
   }
 
   @Mutation(() => User)
   async editUser(@Args('user') userInput: EditUserInput): Promise<User> {
-    return await this.usersService.edit(userInput);
+    return this.usersService.edit(userInput);
   }
 
   @Mutation(() => ObjectIdScalar)
   async deleteUser(@Args({ name: 'userId', type: () => ObjectIdScalar }) userId: ObjectId): Promise<ObjectId> {
-    return await this.usersService.delete(userId);
+    return this.usersService.delete(userId);
   }
 }
