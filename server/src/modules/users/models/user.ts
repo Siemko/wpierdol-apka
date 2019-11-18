@@ -7,15 +7,15 @@ export class User {
   @Field(() => ID)
   readonly _id: string;
 
-  @Field({ nullable: false })
+  @Field()
   @prop({ required: true })
   userName: string;
 
-  @Field({ nullable: false })
+  @Field()
   @prop({ required: true })
   email: string;
 
-  @Field({ nullable: false })
+  @Field()
   @prop({ required: true })
   password: string;
 }
