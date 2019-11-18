@@ -1,21 +1,23 @@
-import { ObjectType, Field, ID } from 'type-graphql';
+import { ObjectType, Field } from 'type-graphql';
 import { prop, buildSchema } from '@typegoose/typegoose';
 import { Schema } from 'mongoose';
+import { ObjectId } from 'bson';
+import { ObjectIdScalar } from 'src/modules/common/GraphQLScalars/ObjectIdScalar';
 
 @ObjectType()
 export class User {
-  @Field(() => ID)
-  readonly _id: string;
+  @Field(() => ObjectIdScalar)
+  readonly _id: ObjectId;
 
-  @Field({ nullable: false })
+  @Field()
   @prop({ required: true })
   userName: string;
 
-  @Field({ nullable: false })
+  @Field()
   @prop({ required: true })
   email: string;
 
-  @Field({ nullable: false })
+  @Field()
   @prop({ required: true })
   password: string;
 }

@@ -9,16 +9,27 @@ input AddUserInput {
   password: String!
 }
 
+input EditUserInput {
+  _id: ObjectId!
+  userName: String
+  email: String
+}
+
 type Mutation {
   addUser(user: AddUserInput!): User!
+  editUser(user: EditUserInput!): User!
+  deleteUser(userId: ObjectId!): ObjectId!
 }
+
+"""Mongo object id scalar type"""
+scalar ObjectId
 
 type Query {
   findAllUsers: [User!]!
 }
 
 type User {
-  _id: ID!
+  _id: ObjectId!
   userName: String!
   email: String!
   password: String!

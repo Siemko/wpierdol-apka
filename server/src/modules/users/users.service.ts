@@ -3,6 +3,8 @@ import { User } from './models/user';
 import { InjectModel } from '@nestjs/mongoose';
 import { AddUserInput } from './models/addUserInput';
 import { Injectable } from '@nestjs/common';
+import { ObjectId } from 'mongodb';
+import { EditUserInput } from './models/editUserInput';
 
 @Injectable()
 export class UsersService {
@@ -24,4 +26,23 @@ export class UsersService {
     return user.save();
   }
 
+  async edit(dto: EditUserInput): Promise<User> {
+    const user = await this.userModel.findById(dto._id);
+    if (!user) {
+      throw new Error(`User with id: "${dto._id}" not found.`);
+    }
+
+    Object.assign(user, dto);
+    return user.save();
+  }
+
+  async delete(id: ObjectId): Promise<ObjectId> {
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      throw new Error(`User with id: "${id}" not found.`);
+    }
+
+    await user.remove();
+    return id;
+  }
 }
