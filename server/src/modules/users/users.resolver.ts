@@ -5,6 +5,7 @@ import { AddUserInput } from './models/addUserInput';
 import { EditUserInput } from './models/editUserInput';
 import { ObjectId } from 'bson';
 import { Inject } from '@nestjs/common';
+import { ObjectIdScalar } from 'src/shared/objectIdScalar';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -28,8 +29,10 @@ export class UsersResolver {
     return this.userService.edit(userInput);
   }
 
-  @Mutation(() => String)
-  async deleteUser(@Args('userId') id: string): Promise<ObjectId> {
-    return this.userService.delete(new ObjectId(id));
+  @Mutation(() => ObjectIdScalar)
+  async deleteUser(
+    @Args({ name: 'userId', type: () => ObjectIdScalar }) id: ObjectId,
+  ): Promise<ObjectId> {
+    return this.userService.delete(id);
   }
 }

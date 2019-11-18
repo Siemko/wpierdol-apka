@@ -29,15 +29,19 @@ export class UsersService {
   }
 
   async edit(dto: EditUserInput): Promise<User> {
-    const user = await this.userModel.findById(dto._id).exec();
-    user.userName = dto.userName;
-    user.email = dto.email;
+    const user = await this.userModel.findById(dto._id);
+
+    Object.assign(user, dto);
 
     return user.save();
   }
 
   async delete(id: ObjectId): Promise<ObjectId> {
-    await this.userModel.remove({ _id: id }).exec();
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      throw new Error('There is no user to delete');
+    }
+    await user.remove();
     return id;
   }
 }

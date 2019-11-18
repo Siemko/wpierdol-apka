@@ -1,0 +1,12 @@
+{
+  "name": "wpierdol",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "docker-compose up --build"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
