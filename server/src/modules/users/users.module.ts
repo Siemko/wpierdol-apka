@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from './models/user';
-import { UsersService } from './users.service';
-import { UsersResolver } from './users.resolver';
 import { CommonModule } from '../common/common.module';
+import { User, UserSchema } from './models/user.schema';
+import { UsersResolver } from './users.resolver';
+import { UsersService } from './users.service';
 
 const services = [UsersService];
 const resolvers = [UsersResolver];
@@ -15,4 +15,4 @@ const resolvers = [UsersResolver];
   ],
   providers: [...services, ...resolvers],
 })
-export class UsersModule { }
+export class UsersModule {}

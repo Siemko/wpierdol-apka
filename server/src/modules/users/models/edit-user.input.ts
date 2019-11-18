@@ -1,6 +1,6 @@
-import { Field, InputType } from 'type-graphql';
 import { ObjectId } from 'bson';
-import { ObjectIdScalar } from 'src/modules/common/GraphQLScalars/ObjectIdScalar';
+import { Field, InputType } from 'type-graphql';
+import { ObjectIdScalar } from '../../common/graphql-scalars/object-id.scalar';
 
 @InputType()
 export class EditUserInput {

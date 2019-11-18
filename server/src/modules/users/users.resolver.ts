@@ -1,14 +1,14 @@
-import { Query, Resolver, Args, Mutation } from '@nestjs/graphql';
-import { User } from './models/user';
-import { UsersService } from './users.service';
-import { AddUserInput } from './models/addUserInput';
-import { ObjectIdScalar } from '../common/GraphQLScalars/ObjectIdScalar';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ObjectId } from 'bson';
-import { EditUserInput } from './models/editUserInput';
+import { ObjectIdScalar } from '../common/graphql-scalars/object-id.scalar';
+import { AddUserInput } from './models/add-user.input';
+import { EditUserInput } from './models/edit-user.input';
+import { User } from './models/user.schema';
+import { UsersService } from './users.service';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
   @Query(() => [User])
   async findAllUsers(): Promise<User[]> {
@@ -26,7 +26,9 @@ export class UsersResolver {
   }
 
   @Mutation(() => ObjectIdScalar)
-  async deleteUser(@Args({ name: 'userId', type: () => ObjectIdScalar }) userId: ObjectId): Promise<ObjectId> {
+  async deleteUser(
+    @Args({ name: 'userId', type: () => ObjectIdScalar }) userId: ObjectId,
+  ): Promise<ObjectId> {
     return this.usersService.delete(userId);
   }
 }

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ObjectIdScalar } from './GraphQLScalars/ObjectIdScalar';
+import { ObjectIdScalar } from './graphql-scalars/object-id.scalar';
 
 @Module({
   providers: [ObjectIdScalar],
