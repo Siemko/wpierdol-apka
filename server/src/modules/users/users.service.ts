@@ -32,14 +32,17 @@ export class UsersService {
       throw new Error(`User with id: "${dto._id}" not found.`);
     }
 
-    user.userName = dto.userName;
-    user.email = dto.email;
-
+    Object.assign(user, dto);
     return user.save();
   }
 
   async delete(id: ObjectId): Promise<ObjectId> {
-    await this.userModel.deleteOne({ _id: id }).exec();
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      throw new Error(`User with id: "${id}" not found.`);
+    }
+
+    await user.remove();
     return id;
   }
 }
