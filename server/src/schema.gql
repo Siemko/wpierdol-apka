@@ -11,8 +11,8 @@ input AddUserInput {
 
 input EditUserInput {
   _id: ObjectId!
-  userName: String!
-  email: String!
+  userName: String
+  email: String
 }
 
 type Mutation {

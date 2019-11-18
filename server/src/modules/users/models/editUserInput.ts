@@ -7,9 +7,9 @@ export class EditUserInput {
   @Field(() => ObjectIdScalar)
   readonly _id: ObjectId;
 
-  @Field()
-  userName: string;
+  @Field({ nullable: true })
+  userName?: string;
 
-  @Field()
-  email: string;
+  @Field({ nullable: true })
+  email?: string;
 }
