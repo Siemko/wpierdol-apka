@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { AddUserInput } from './models/addUserInput';
 import { ObjectIdScalar } from '../common/GraphGLScalars/ObjectIdScalar';
 import { ObjectId } from 'bson';
+import { EditUserInput } from './models/editUserInput';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -17,6 +18,11 @@ export class UsersResolver {
   @Mutation(() => User)
   async addUser(@Args('user') userInput: AddUserInput): Promise<User> {
     return await this.usersService.add(userInput);
+  }
+
+  @Mutation(() => User)
+  async editUser(@Args('user') userInput: EditUserInput): Promise<User> {
+    return await this.usersService.edit(userInput);
   }
 
   @Mutation(() => ObjectIdScalar)

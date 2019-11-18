@@ -9,8 +9,15 @@ input AddUserInput {
   password: String!
 }
 
+input EditUserInput {
+  _id: ID!
+  userName: String!
+  email: String!
+}
+
 type Mutation {
   addUser(user: AddUserInput!): User!
+  editUser(user: EditUserInput!): User!
   deleteUser(userId: ObjectId!): ObjectId!
 }
 
