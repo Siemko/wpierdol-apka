@@ -1,6 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ObjectIdScalar } from '../common/graphql-scalars/object-id.scalar';
 import { AddReportInput } from './models/add-report.input';
+import { EditReportInput } from './models/edit-report.input';
 import { Report } from './models/report.schema';
 import { ReportsService } from './reports.service';
 
@@ -21,5 +22,10 @@ export class ReportsResolver {
   @Mutation(() => Report)
   async addReport(@Args('report') reportInput: AddReportInput): Promise<Report> {
     return this.reportsService.add(reportInput);
+  }
+
+  @Mutation(() => Report)
+  async editReport(@Args('report') reportInput: EditReportInput): Promise<Report> {
+    return this.reportsService.edit(reportInput);
   }
 }
