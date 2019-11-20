@@ -18,7 +18,7 @@ export class Report {
     @Property({ required: true, maxlength: 250 })
     description: string;
 
-    @Field()
+    @Field(() => ObjectIdScalar)
     @Property({ ref: User })
     reportedBy: ObjectId;
 }
