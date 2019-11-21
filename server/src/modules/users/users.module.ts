@@ -14,5 +14,6 @@ const resolvers = [UsersResolver];
     CommonModule,
   ],
   providers: [...services, ...resolvers],
+  exports: [UsersService]
 })
-export class UsersModule {}
+export class UsersModule { }
