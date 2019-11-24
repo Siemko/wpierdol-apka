@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './modules/users/users.module';
+import { ReportsModule } from './modules/reports/reports.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { UsersModule } from './modules/users/users.module';
     }),
     MongooseModule.forRoot(`mongodb://mongo/wpierdol`),
     UsersModule,
+    ReportsModule
   ],
   controllers: [AppController],
   providers: [AppService],

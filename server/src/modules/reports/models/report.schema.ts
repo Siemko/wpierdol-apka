@@ -3,24 +3,25 @@ import { ObjectId } from 'bson';
 import { Schema } from 'mongoose';
 import { Field, ObjectType } from 'type-graphql';
 import { ObjectIdScalar } from '../../common/graphql-scalars/object-id.scalar';
+import { User } from '../../users/models/user.schema';
 
 @ObjectType()
-export class User {
+export class Report {
   @Field(() => ObjectIdScalar)
   readonly _id: ObjectId;
 
   @Field()
   @Property({ required: true })
-  userName: string;
+  title: string;
+
+  @Field(() => ObjectIdScalar, { nullable: true })
+  @Property({ ref: User })
+  author: ObjectId;
 
   @Field()
   @Property({ required: true })
-  email: string;
-
-  @Field()
-  @Property({ required: true })
-  password: string;
+  description: string;
 
 }
 
-export const UserSchema: Schema<typeof User> = buildSchema(User);
+export const ReportSchema: Schema<typeof Report> = buildSchema(Report);
