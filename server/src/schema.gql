@@ -11,8 +11,6 @@ input AddReportInput {
 
 input AddUserInput {
   userName: String!
-  email: String!
-  password: String!
 }
 
 input EditReportInput {
@@ -29,7 +27,7 @@ input EditUserInput {
 }
 
 type Mutation {
-  addUser(user: AddUserInput!): User!
+  addUser(user: AddUserInput!): TokenModel!
   editUser(user: EditUserInput!): User!
   deleteUser(userId: ObjectId!): ObjectId!
   addReport(report: AddReportInput!): Report!
@@ -52,9 +50,13 @@ type Report {
   reportedBy: ObjectId!
 }
 
+type TokenModel {
+  token: String!
+}
+
 type User {
   _id: ObjectId!
   userName: String!
-  email: String!
-  password: String!
+  email: String
+  password: String
 }

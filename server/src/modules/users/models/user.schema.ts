@@ -13,13 +13,13 @@ export class User {
   @Property({ required: true })
   userName: string;
 
-  @Field()
-  @Property({ required: true })
-  email: string;
+  @Field({ nullable: true })
+  @Property()
+  email?: string;
 
-  @Field()
-  @Property({ required: true })
-  password: string;
+  @Field({ nullable: true })
+  @Property()
+  password?: string;
 }
 
 export const UserSchema: Schema<typeof User> = buildSchema(User);

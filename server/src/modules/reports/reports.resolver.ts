@@ -4,6 +4,8 @@ import { AddReportInput } from './models/add-report.input';
 import { EditReportInput } from './models/edit-report.input';
 import { Report } from './models/report.schema';
 import { ReportsService } from './reports.service';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../auth/guards/user-auth.guard';
 
 @Resolver(() => Report)
 export class ReportsResolver {
@@ -20,6 +22,7 @@ export class ReportsResolver {
   }
 
   @Mutation(() => Report)
+  @UseGuards(AuthGuard)
   async addReport(@Args('report') reportInput: AddReportInput): Promise<Report> {
     return this.reportsService.add(reportInput);
   }

@@ -20,9 +20,8 @@ export class UsersService {
 
   async add(dto: AddUserInput): Promise<User> {
     const user = new this.userModel();
-    user.userName = dto.userName;
-    user.password = await hashPassword(dto.password);
-    user.email = dto.email;
+
+    Object.assign(user, dto);
 
     return user.save();
   }
@@ -34,6 +33,7 @@ export class UsersService {
     }
 
     Object.assign(user, dto);
+
     return user.save();
   }
 
