@@ -3,6 +3,12 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input AddReportInput {
+  title: String!
+  description: String!
+  user: ObjectId!
+}
+
 input AddUserInput {
   userName: String!
   email: String!
@@ -19,6 +25,7 @@ type Mutation {
   addUser(user: AddUserInput!): User!
   editUser(user: EditUserInput!): User!
   deleteUser(userId: ObjectId!): ObjectId!
+  addReport(report: AddReportInput!): Report!
 }
 
 """Mongo object id scalar type"""
@@ -26,6 +33,14 @@ scalar ObjectId
 
 type Query {
   findAllUsers: [User!]!
+  findAllReports: [Report!]!
+}
+
+type Report {
+  _id: ObjectId!
+  title: String!
+  description: String!
+  user: User
 }
 
 type User {

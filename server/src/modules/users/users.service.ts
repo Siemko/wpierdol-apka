@@ -45,4 +45,8 @@ export class UsersService {
     await user.remove();
     return id;
   }
+
+  async find(id: ObjectId): Promise<User> {
+    return this.userModel.findById(id).exec();
+  }
 }

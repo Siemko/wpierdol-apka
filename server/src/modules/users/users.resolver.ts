@@ -5,10 +5,13 @@ import { AddUserInput } from './models/add-user.input';
 import { EditUserInput } from './models/edit-user.input';
 import { User } from './models/user.schema';
 import { UsersService } from './users.service';
+import { Inject } from '@nestjs/common';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    @Inject(UsersService) private readonly usersService: UsersService,
+  ) {}
 
   @Query(() => [User])
   async findAllUsers(): Promise<User[]> {
