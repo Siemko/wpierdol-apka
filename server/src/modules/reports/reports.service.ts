@@ -23,9 +23,7 @@ export class ReportsService {
 
   async add(dto: AddReportInput): Promise<Report> {
     const report = new this.reportModel();
-    report.title = dto.title;
-    report.description = dto.title;
-    report.reportedBy = dto.reportedBy;
+    Object.assign(report, dto);
 
     return report.save();
   }
