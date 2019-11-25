@@ -20,10 +20,6 @@ export class User {
   @Field()
   @Property({ required: true })
   password: string;
-
-  @Field()
-  @Property({ref: User})
-  child: ObjectId;
 }
 
 export const UserSchema: Schema<typeof User> = buildSchema(User);
