@@ -5,6 +5,7 @@ import { ObjectIdScalar } from '../common/graphql-scalars/object-id.scalar';
 import { AddReportInput } from './models/add-report.input';
 import { EditReportInput } from './models/edit-report.input';
 import { Report } from './models/report.schema';
+import { ICurrentUser } from '../auth/interfaces/current-user.interface';
 
 @Injectable()
 export class ReportsService {
@@ -21,8 +22,9 @@ export class ReportsService {
       return this.reportModel.findById(id);
   }
 
-  async add(dto: AddReportInput): Promise<Report> {
+  async add(dto: AddReportInput, user: ICurrentUser): Promise<Report> {
     const report = new this.reportModel();
+    report.reportedBy = user._id;
     Object.assign(report, dto);
 
     return report.save();
@@ -30,7 +32,7 @@ export class ReportsService {
 
   async edit(dto: EditReportInput): Promise<Report> {
     const report = await this.reportModel.findById(dto._id);
-    if (!report || !report.reportedBy.equals(dto.reportedBy)) {
+    if (!report) {
       throw new Error(`Report with id: "${dto._id}" not found.`);
     }
     Object.assign(report, dto);
